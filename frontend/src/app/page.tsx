@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { createClient } from "@/lib/supabase/server";
 import { ProductCard } from "@/components/products/ProductCard";
+import { CategoryRow, ConditionBanners, AIButton } from "@/components/ui/HomeClientSections";
 import { ArrowRight, Shield, Truck, RefreshCw, Headphones, CheckCircle2, Star } from "lucide-react";
 import type { Product, Category } from "@/types";
 
@@ -65,15 +66,12 @@ export default async function HomePage() {
     <div style={{ background: "#F1F5F9" }}>
 
       {/* ── HERO ── */}
-      <section
-        style={{
-          background: "linear-gradient(135deg, #081A2B 0%, #0A2540 60%, #0D2E52 100%)",
-          minHeight: 600,
-          position: "relative",
-          overflow: "hidden",
-        }}
-      >
-        {/* Circuit pattern overlay */}
+      <section style={{
+        background: "linear-gradient(135deg, #081A2B 0%, #0A2540 60%, #0D2E52 100%)",
+        minHeight: 600,
+        position: "relative",
+        overflow: "hidden",
+      }}>
         <div style={{
           position: "absolute", inset: 0, opacity: 0.04,
           backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23006BFF' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
@@ -81,7 +79,6 @@ export default async function HomePage() {
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            {/* Left — text */}
             <div>
               <div style={{
                 display: "inline-flex", alignItems: "center", gap: 8,
@@ -108,12 +105,9 @@ export default async function HomePage() {
               </h1>
 
               <p style={{
-                color: "#94A3B8",
-                fontSize: "1.05rem",
-                fontFamily: "'Inter', sans-serif",
-                lineHeight: 1.7,
-                marginBottom: 32,
-                maxWidth: 440,
+                color: "#94A3B8", fontSize: "1.05rem",
+                fontFamily: "'Inter', sans-serif", lineHeight: 1.7,
+                marginBottom: 32, maxWidth: 440,
               }}>
                 Premium laptops, smartphones and electronics.<br />
                 New. Refurbished. Professionally tested.
@@ -128,7 +122,6 @@ export default async function HomePage() {
                 </Link>
               </div>
 
-              {/* Mini stats */}
               <div style={{ display: "flex", gap: 32, marginTop: 40 }}>
                 {[
                   { num: "500+", label: "Products" },
@@ -143,14 +136,11 @@ export default async function HomePage() {
               </div>
             </div>
 
-            {/* Right — real images from Unsplash */}
             <div className="hidden lg:block relative" style={{ height: 420 }}>
               <div style={{
                 position: "absolute", top: 0, right: 0,
-                width: 300, height: 260,
-                borderRadius: 16,
-                overflow: "hidden",
-                border: "2px solid rgba(0,107,255,0.3)",
+                width: 300, height: 260, borderRadius: 16,
+                overflow: "hidden", border: "2px solid rgba(0,107,255,0.3)",
                 boxShadow: "0 20px 60px rgba(0,0,0,0.4)",
               }}>
                 <Image
@@ -163,10 +153,8 @@ export default async function HomePage() {
               </div>
               <div style={{
                 position: "absolute", bottom: 0, left: 40,
-                width: 220, height: 200,
-                borderRadius: 16,
-                overflow: "hidden",
-                border: "2px solid rgba(0,107,255,0.2)",
+                width: 220, height: 200, borderRadius: 16,
+                overflow: "hidden", border: "2px solid rgba(0,107,255,0.2)",
                 boxShadow: "0 20px 60px rgba(0,0,0,0.4)",
               }}>
                 <Image
@@ -177,13 +165,6 @@ export default async function HomePage() {
                   sizes="220px"
                 />
               </div>
-              {/* Glow */}
-              <div style={{
-                position: "absolute", top: "30%", left: "30%",
-                width: 200, height: 200, borderRadius: "50%",
-                background: "radial-gradient(circle, rgba(0,107,255,0.15) 0%, transparent 70%)",
-                pointerEvents: "none",
-              }} />
             </div>
           </div>
         </div>
@@ -198,113 +179,13 @@ export default async function HomePage() {
               All products <ArrowRight size={14} />
             </Link>
           </div>
-
-          {categories.length > 0 ? (
-            <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
-              {categories.map((cat) => (
-                <Link
-                  key={cat.id}
-                  href={`/products?category=${cat.slug}`}
-                  style={{
-                    flexShrink: 0,
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    gap: 8,
-                    background: "#FFFFFF",
-                    border: "1.5px solid #E2E8F0",
-                    borderRadius: 12,
-                    padding: "16px 20px",
-                    minWidth: 100,
-                    transition: "all 0.2s",
-                    textDecoration: "none",
-                  }}
-                  onMouseEnter={e => {
-                    (e.currentTarget as HTMLElement).style.borderColor = "#006BFF";
-                    (e.currentTarget as HTMLElement).style.transform = "translateY(-3px)";
-                    (e.currentTarget as HTMLElement).style.boxShadow = "0 8px 20px rgba(0,107,255,0.12)";
-                  }}
-                  onMouseLeave={e => {
-                    (e.currentTarget as HTMLElement).style.borderColor = "#E2E8F0";
-                    (e.currentTarget as HTMLElement).style.transform = "translateY(0)";
-                    (e.currentTarget as HTMLElement).style.boxShadow = "none";
-                  }}
-                >
-                  <span style={{ fontSize: "1.75rem" }}>{cat.icon}</span>
-                  <span style={{ fontSize: "0.75rem", fontWeight: 600, color: "#111827", fontFamily: "'Space Grotesk',sans-serif", whiteSpace: "nowrap" }}>{cat.name}</span>
-                </Link>
-              ))}
-            </div>
-          ) : (
-            /* Placeholder categories when DB is empty */
-            <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
-              {[
-                { icon: "💻", name: "Laptops" },
-                { icon: "📱", name: "Smartphones" },
-                { icon: "📟", name: "Tablets" },
-                { icon: "🎮", name: "Gaming" },
-                { icon: "🎧", name: "Audio" },
-                { icon: "📺", name: "TVs" },
-                { icon: "🖨️", name: "Accessories" },
-                { icon: "🌐", name: "Networking" },
-              ].map((cat) => (
-                <Link
-                  key={cat.name}
-                  href={`/products?category=${cat.name.toLowerCase()}`}
-                  style={{
-                    flexShrink: 0,
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    gap: 8,
-                    background: "#FFFFFF",
-                    border: "1.5px solid #E2E8F0",
-                    borderRadius: 12,
-                    padding: "16px 20px",
-                    minWidth: 100,
-                    transition: "all 0.2s",
-                    textDecoration: "none",
-                  }}
-                >
-                  <span style={{ fontSize: "1.75rem" }}>{cat.icon}</span>
-                  <span style={{ fontSize: "0.75rem", fontWeight: 600, color: "#111827", fontFamily: "'Space Grotesk',sans-serif" }}>{cat.name}</span>
-                </Link>
-              ))}
-            </div>
-          )}
+          <CategoryRow categories={categories} />
         </div>
       </section>
 
       {/* ── CONDITION BANNERS ── */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          {[
-            { label: "New Electronics", sub: "Brand new, sealed box", cond: "new", bg: "#006BFF" },
-            { label: "Certified Refurbished", sub: "Tested & restored by Muratis", cond: "refurbished", bg: "#16A34A" },
-            { label: "Second Hand", sub: "Used, honest prices", cond: "second-hand", bg: "#EA580C" },
-          ].map((b) => (
-            <Link
-              key={b.cond}
-              href={`/products?condition=${b.cond}`}
-              style={{
-                background: b.bg,
-                borderRadius: 12,
-                padding: "24px 28px",
-                display: "block",
-                textDecoration: "none",
-                transition: "opacity 0.2s, transform 0.2s",
-              }}
-              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.opacity = "0.92"; (e.currentTarget as HTMLElement).style.transform = "translateY(-2px)"; }}
-              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.opacity = "1"; (e.currentTarget as HTMLElement).style.transform = "translateY(0)"; }}
-            >
-              <p style={{ fontFamily: "'Space Grotesk',sans-serif", fontWeight: 700, fontSize: "1.1rem", color: "#FFFFFF" }}>{b.label}</p>
-              <p style={{ color: "rgba(255,255,255,0.75)", fontSize: "0.85rem", marginTop: 4, fontFamily: "'Inter',sans-serif" }}>{b.sub}</p>
-              <span style={{ display: "inline-flex", alignItems: "center", gap: 4, marginTop: 14, color: "#FFFFFF", fontSize: "0.85rem", fontWeight: 600, fontFamily: "'Space Grotesk',sans-serif" }}>
-                Browse <ArrowRight size={14} />
-              </span>
-            </Link>
-          ))}
-        </div>
+        <ConditionBanners />
       </section>
 
       {/* ── FEATURED PRODUCTS ── */}
@@ -345,11 +226,8 @@ export default async function HomePage() {
                 <div key={check} style={{
                   background: "rgba(255,255,255,0.05)",
                   border: "1px solid rgba(0,107,255,0.2)",
-                  borderRadius: 12,
-                  padding: "20px",
-                  display: "flex",
-                  alignItems: "flex-start",
-                  gap: 12,
+                  borderRadius: 12, padding: "20px",
+                  display: "flex", alignItems: "flex-start", gap: 12,
                 }}>
                   <CheckCircle2 size={20} color="#006BFF" style={{ flexShrink: 0, marginTop: 2 }} />
                   <span style={{ color: "#E2E8F0", fontFamily: "'Space Grotesk',sans-serif", fontWeight: 600, fontSize: "0.9rem" }}>{check}</span>
@@ -385,10 +263,8 @@ export default async function HomePage() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
             {REVIEWS.map((r) => (
               <div key={r.name} style={{
-                background: "#F8FAFC",
-                border: "1.5px solid #E2E8F0",
-                borderRadius: 12,
-                padding: "28px 24px",
+                background: "#F8FAFC", border: "1.5px solid #E2E8F0",
+                borderRadius: 12, padding: "28px 24px",
               }}>
                 <div style={{ display: "flex", gap: 2, marginBottom: 14 }}>
                   {Array.from({ length: r.stars }).map((_, i) => (
@@ -436,43 +312,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ── AI ASSISTANT FLOATING BUTTON ── */}
-      <div style={{
-        position: "fixed",
-        bottom: 28,
-        right: 28,
-        zIndex: 100,
-      }}>
-        <button
-          style={{
-            background: "#006BFF",
-            borderRadius: "50%",
-            width: 60,
-            height: 60,
-            border: "none",
-            cursor: "pointer",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            boxShadow: "0 4px 24px rgba(0,107,255,0.45)",
-            transition: "transform 0.2s, box-shadow 0.2s",
-          }}
-          onMouseEnter={e => {
-            (e.currentTarget as HTMLElement).style.transform = "scale(1.08)";
-            (e.currentTarget as HTMLElement).style.boxShadow = "0 6px 32px rgba(0,107,255,0.6)";
-          }}
-          onMouseLeave={e => {
-            (e.currentTarget as HTMLElement).style.transform = "scale(1)";
-            (e.currentTarget as HTMLElement).style.boxShadow = "0 4px 24px rgba(0,107,255,0.45)";
-          }}
-          title="Muratis AI Assistant"
-        >
-          <span style={{ fontSize: "1.4rem", lineHeight: 1 }}>◉</span>
-          <span style={{ color: "#FFFFFF", fontSize: "0.45rem", fontFamily: "'Space Grotesk',sans-serif", fontWeight: 700, letterSpacing: "0.05em", marginTop: 2 }}>AI</span>
-        </button>
-      </div>
-
+      <AIButton />
     </div>
   );
 }
