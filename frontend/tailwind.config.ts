@@ -10,21 +10,25 @@ const config: Config = {
     extend: {
       colors: {
         brand: {
-          DEFAULT: "#0A2540",  // deep navy
-          light: "#1A3A5C",
-          dark: "#061829",
+          DEFAULT: "#081A2B",
+          light: "#0A2540",
+          dark: "#040F1A",
         },
         accent: {
-          DEFAULT: "#00C896",  // vibrant green
-          light: "#00F0B5",
-          dark: "#00A07A",
+          DEFAULT: "#006BFF",
+          light: "#3385FF",
+          dark: "#0058d6",
         },
-        surface: "#F7F9FC",
-        muted: "#8898AA",
+        surface: "#F1F5F9",
+        muted: "#64748B",
       },
       fontFamily: {
-        display: ["var(--font-display)", "sans-serif"],
-        body: ["var(--font-body)", "sans-serif"],
+        display: ["Space Grotesk", "sans-serif"],
+        body: ["Inter", "sans-serif"],
+        mono: ["JetBrains Mono", "monospace"],
+      },
+      borderRadius: {
+        card: "8px",
       },
     },
   },

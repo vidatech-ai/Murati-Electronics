@@ -1,22 +1,33 @@
 "use client";
 import Link from "next/link";
-import Image from "next/image";
 import { useState, useEffect } from "react";
-import { ShoppingCart, Search, Menu, X, User } from "lucide-react";
+import { ShoppingCart, Search, Menu, X, User, Heart } from "lucide-react";
 import { useCart } from "@/hooks/useCart";
 import { createClient } from "@/lib/supabase/client";
+
+const NAV_LINKS = [
+  { label: "Laptops", href: "/products?category=laptops" },
+  { label: "Phones", href: "/products?category=smartphones" },
+  { label: "Tablets", href: "/products?category=tablets" },
+  { label: "Refurbished", href: "/products?condition=refurbished" },
+  { label: "Deals", href: "/products?featured=true" },
+];
 
 export function Navbar() {
   const { count } = useCart();
   const [menuOpen, setMenuOpen] = useState(false);
   const [user, setUser] = useState<{ email: string } | null>(null);
   const [search, setSearch] = useState("");
+  const [scrolled, setScrolled] = useState(false);
   const supabase = createClient();
 
   useEffect(() => {
     supabase.auth.getUser().then(({ data }) => {
       if (data.user) setUser({ email: data.user.email! });
     });
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   const handleSearch = (e: React.FormEvent) => {
@@ -25,95 +36,180 @@ export function Navbar() {
   };
 
   return (
-    <header className="sticky top-0 z-50 bg-brand shadow-md">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 flex-shrink-0">
-            {/* LOGO PLACEMENT: Replace the div below with your logo image */}
-            {/* <Image src="/logo.png" alt="Muratis Electronics" width={140} height={40} priority /> */}
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-accent rounded-lg flex items-center justify-center font-bold text-white text-sm">ME</div>
-              <span className="text-white font-bold text-lg" style={{ fontFamily: "Syne, sans-serif" }}>
-                Muratis<span className="text-accent">.</span>
-              </span>
-            </div>
-          </Link>
+    <header
+      className="sticky top-0 z-50 transition-shadow duration-200"
+      style={{
+        background: "#081A2B",
+        boxShadow: scrolled ? "0 2px 16px rgba(0,0,0,0.3)" : "none",
+        height: "80px",
+      }}
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center gap-4">
 
-          {/* Search bar — desktop */}
-          <form onSubmit={handleSearch} className="hidden md:flex flex-1 max-w-xl mx-6">
-            <div className="relative w-full">
-              <input
-                type="text"
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                placeholder="Search laptops, phones, TVs..."
-                className="w-full pl-4 pr-10 py-2 rounded-lg text-sm text-brand bg-white focus:outline-none focus:ring-2 focus:ring-accent"
-              />
-              <button type="submit" className="absolute right-2 top-1/2 -translate-y-1/2 text-muted hover:text-brand">
-                <Search size={16} />
-              </button>
-            </div>
-          </form>
+        {/* Logo */}
+        <Link href="/" className="flex-shrink-0 flex flex-col leading-none select-none" style={{ minWidth: 110 }}>
+          <span style={{
+            fontFamily: "'Space Grotesk', sans-serif",
+            fontWeight: 800,
+            fontSize: "1.25rem",
+            color: "#FFFFFF",
+            letterSpacing: "-0.02em",
+          }}>
+            MURATIS
+          </span>
+          <span style={{
+            fontFamily: "'Space Grotesk', sans-serif",
+            fontWeight: 500,
+            fontSize: "0.6rem",
+            color: "#006BFF",
+            letterSpacing: "0.18em",
+          }}>
+            ELECTRONICS
+          </span>
+        </Link>
 
-          {/* Right icons */}
-          <div className="flex items-center gap-4">
-            <Link href="/cart" className="relative text-white hover:text-accent transition-colors">
-              <ShoppingCart size={22} />
-              {count > 0 && (
-                <span className="absolute -top-2 -right-2 bg-accent text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center">
-                  {count}
-                </span>
-              )}
-            </Link>
-
-            {user ? (
-              <Link href="/orders" className="text-white hover:text-accent transition-colors">
-                <User size={22} />
-              </Link>
-            ) : (
-              <Link href="/auth/login" className="hidden sm:block btn-primary py-1.5 px-4 text-sm">
-                Sign In
-              </Link>
-            )}
-
-            <button
-              className="md:hidden text-white"
-              onClick={() => setMenuOpen(!menuOpen)}
+        {/* Desktop nav links */}
+        <nav className="hidden lg:flex items-center gap-1 flex-shrink-0">
+          {NAV_LINKS.map((l) => (
+            <Link
+              key={l.label}
+              href={l.href}
+              className="text-sm font-medium px-3 py-1.5 rounded-md transition-colors duration-150"
+              style={{ color: "#CBD5E1", fontFamily: "'Inter', sans-serif" }}
+              onMouseEnter={e => (e.currentTarget.style.color = "#006BFF")}
+              onMouseLeave={e => (e.currentTarget.style.color = "#CBD5E1")}
             >
-              {menuOpen ? <X size={22} /> : <Menu size={22} />}
+              {l.label}
+            </Link>
+          ))}
+        </nav>
+
+        {/* Search bar */}
+        <form onSubmit={handleSearch} className="hidden md:flex flex-1 mx-2">
+          <div className="relative w-full">
+            <input
+              type="text"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              placeholder="Search laptops, phones, electronics..."
+              style={{
+                background: "rgba(255,255,255,0.08)",
+                border: "1.5px solid rgba(255,255,255,0.12)",
+                color: "#FFFFFF",
+                fontFamily: "'Inter', sans-serif",
+                fontSize: "0.875rem",
+                borderRadius: "8px",
+                width: "100%",
+                padding: "10px 40px 10px 16px",
+                outline: "none",
+                transition: "border-color 0.2s",
+              }}
+              onFocus={e => (e.currentTarget.style.borderColor = "#006BFF")}
+              onBlur={e => (e.currentTarget.style.borderColor = "rgba(255,255,255,0.12)")}
+            />
+            <button
+              type="submit"
+              className="absolute right-3 top-1/2 -translate-y-1/2"
+              style={{ color: "#64748B" }}
+            >
+              <Search size={16} />
             </button>
           </div>
-        </div>
+        </form>
 
-        {/* Mobile search */}
-        <form onSubmit={handleSearch} className="md:hidden pb-3">
+        {/* Right icons */}
+        <div className="flex items-center gap-3 flex-shrink-0 ml-auto lg:ml-0">
+          <Link href="/wishlist" className="hidden sm:flex text-gray-400 hover:text-white transition-colors" title="Wishlist">
+            <Heart size={20} />
+          </Link>
+
+          {user ? (
+            <Link href="/orders" className="text-gray-400 hover:text-white transition-colors" title="My Orders">
+              <User size={20} />
+            </Link>
+          ) : (
+            <Link
+              href="/auth/login"
+              className="hidden sm:flex items-center gap-1 text-sm font-semibold text-gray-300 hover:text-white transition-colors"
+              style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+            >
+              <User size={18} /> Sign In
+            </Link>
+          )}
+
+          <Link href="/cart" className="relative flex items-center gap-1.5 text-gray-300 hover:text-white transition-colors">
+            <ShoppingCart size={20} />
+            {count > 0 && (
+              <span
+                className="absolute -top-2 -right-2 text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center"
+                style={{ background: "#006BFF", fontFamily: "'Space Grotesk', sans-serif" }}
+              >
+                {count}
+              </span>
+            )}
+          </Link>
+
+          <button
+            className="lg:hidden text-gray-300 hover:text-white transition-colors"
+            onClick={() => setMenuOpen(!menuOpen)}
+          >
+            {menuOpen ? <X size={22} /> : <Menu size={22} />}
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile search */}
+      <div className="md:hidden px-4 pb-3" style={{ background: "#081A2B" }}>
+        <form onSubmit={handleSearch}>
           <div className="relative">
             <input
               type="text"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search electronics..."
-              className="w-full pl-4 pr-10 py-2 rounded-lg text-sm text-brand bg-white focus:outline-none"
+              style={{
+                background: "rgba(255,255,255,0.08)",
+                border: "1.5px solid rgba(255,255,255,0.12)",
+                color: "#FFFFFF",
+                fontFamily: "'Inter', sans-serif",
+                fontSize: "0.875rem",
+                borderRadius: "8px",
+                width: "100%",
+                padding: "9px 36px 9px 14px",
+                outline: "none",
+              }}
             />
-            <button type="submit" className="absolute right-2 top-1/2 -translate-y-1/2 text-muted">
-              <Search size={16} />
+            <button type="submit" className="absolute right-3 top-1/2 -translate-y-1/2" style={{ color: "#64748B" }}>
+              <Search size={15} />
             </button>
           </div>
         </form>
       </div>
 
-      {/* Mobile nav menu */}
+      {/* Mobile menu */}
       {menuOpen && (
-        <div className="md:hidden bg-brand-light border-t border-brand-dark">
-          <nav className="flex flex-col px-4 py-3 gap-3 text-white text-sm font-medium">
-            <Link href="/products" onClick={() => setMenuOpen(false)}>All Products</Link>
-            <Link href="/products?category=laptops" onClick={() => setMenuOpen(false)}>Laptops</Link>
-            <Link href="/products?category=smartphones" onClick={() => setMenuOpen(false)}>Smartphones</Link>
-            <Link href="/products?condition=second-hand" onClick={() => setMenuOpen(false)}>Second Hand</Link>
-            <Link href="/products?condition=refurbished" onClick={() => setMenuOpen(false)}>Refurbished</Link>
-            {!user && <Link href="/auth/login" className="btn-primary text-center py-2" onClick={() => setMenuOpen(false)}>Sign In</Link>}
-            {user && <Link href="/orders" onClick={() => setMenuOpen(false)}>My Orders</Link>}
+        <div style={{ background: "#0A2540", borderTop: "1px solid rgba(255,255,255,0.08)" }}>
+          <nav className="flex flex-col px-4 py-4 gap-1">
+            {NAV_LINKS.map((l) => (
+              <Link
+                key={l.label}
+                href={l.href}
+                onClick={() => setMenuOpen(false)}
+                className="text-sm font-medium py-2.5 px-3 rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition-colors"
+                style={{ fontFamily: "'Inter', sans-serif" }}
+              >
+                {l.label}
+              </Link>
+            ))}
+            {!user && (
+              <Link
+                href="/auth/login"
+                onClick={() => setMenuOpen(false)}
+                className="mt-2 btn-primary text-center py-2.5 text-sm"
+              >
+                Sign In
+              </Link>
+            )}
           </nav>
         </div>
       )}

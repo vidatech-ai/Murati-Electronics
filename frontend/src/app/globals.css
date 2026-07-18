@@ -1,55 +1,102 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Syne:wght@700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --font-display: 'Syne', sans-serif;
+  --midnight: #081A2B;
+  --electric: #006BFF;
+  --white: #FFFFFF;
+  --soft-gray: #F1F5F9;
+  --text-primary: #111827;
+  --text-secondary: #64748B;
+  --font-display: 'Space Grotesk', sans-serif;
   --font-body: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
 }
 
-* { box-sizing: border-box; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
   font-family: var(--font-body);
-  background-color: #F7F9FC;
-  color: #0A2540;
+  background-color: var(--soft-gray);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
 }
 
-h1, h2, h3, .display {
+h1, h2, h3, h4, .display {
   font-family: var(--font-display);
 }
 
-/* Smooth scrolling */
 html { scroll-behavior: smooth; }
 
-/* Focus ring */
 :focus-visible {
-  outline: 2px solid #00C896;
+  outline: 2px solid var(--electric);
   outline-offset: 2px;
 }
 
-/* Custom scrollbar */
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: #F7F9FC; }
-::-webkit-scrollbar-thumb { background: #00C896; border-radius: 3px; }
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: var(--soft-gray); }
+::-webkit-scrollbar-thumb { background: var(--electric); border-radius: 4px; }
+
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
 
 @layer components {
   .btn-primary {
-    @apply bg-accent text-white font-semibold px-6 py-3 rounded-lg
-           hover:bg-accent-dark transition-colors duration-200
+    @apply inline-flex items-center justify-center gap-2
+           font-semibold px-6 py-3 rounded-lg text-white
+           transition-all duration-200
            disabled:opacity-50 disabled:cursor-not-allowed;
+    background: var(--electric);
+    font-family: var(--font-display);
   }
-  .btn-secondary {
-    @apply bg-white border-2 border-brand text-brand font-semibold px-6 py-3 rounded-lg
-           hover:bg-brand hover:text-white transition-colors duration-200;
+  .btn-primary:hover { background: #0058d6; transform: translateY(-1px); }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-2
+           font-semibold px-6 py-3 rounded-lg
+           border-2 border-white text-white
+           transition-all duration-200;
+    font-family: var(--font-display);
   }
+  .btn-outline:hover { background: white; color: var(--midnight); }
+
   .card {
-    @apply bg-white rounded-xl shadow-sm border border-gray-100
-           hover:shadow-md transition-shadow duration-200;
+    @apply bg-white rounded-lg border border-gray-100
+           transition-all duration-200;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
   }
-  .badge-new { @apply bg-accent text-white text-xs font-bold px-2 py-0.5 rounded-full; }
-  .badge-refurbished { @apply bg-blue-500 text-white text-xs font-bold px-2 py-0.5 rounded-full; }
-  .badge-second-hand { @apply bg-yellow-500 text-white text-xs font-bold px-2 py-0.5 rounded-full; }
+  .card:hover { box-shadow: 0 4px 16px rgba(0,107,255,0.10); transform: translateY(-2px); }
+
+  .spec-row {
+    font-family: var(--font-mono);
+    @apply text-xs text-gray-500 flex justify-between py-0.5;
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    @apply text-2xl font-bold;
+    color: var(--text-primary);
+  }
+
+  .badge-new {
+    @apply text-white text-xs font-bold px-2 py-0.5 rounded-sm;
+    background: var(--electric);
+    font-family: var(--font-display);
+    letter-spacing: 0.05em;
+  }
+  .badge-refurbished {
+    @apply text-white text-xs font-bold px-2 py-0.5 rounded-sm;
+    background: #16A34A;
+    font-family: var(--font-display);
+    letter-spacing: 0.05em;
+  }
+  .badge-secondhand {
+    @apply text-white text-xs font-bold px-2 py-0.5 rounded-sm;
+    background: #EA580C;
+    font-family: var(--font-display);
+    letter-spacing: 0.05em;
+  }
 }

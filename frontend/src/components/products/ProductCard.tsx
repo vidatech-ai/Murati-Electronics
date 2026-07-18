@@ -22,10 +22,20 @@ export function ProductCard({ product }: { product: Product }) {
     toast.success(`${product.name} added to cart`);
   };
 
+  const badgeClass =
+    product.condition === "new" ? "badge-new"
+    : product.condition === "refurbished" ? "badge-refurbished"
+    : "badge-secondhand";
+
+  const badgeLabel =
+    product.condition === "new" ? "NEW"
+    : product.condition === "refurbished" ? "MURATIS VERIFIED"
+    : "PRE-OWNED";
+
   return (
-    <Link href={`/products/${product.slug}`} className="card block group">
+    <Link href={`/products/${product.slug}`} className="card block group" style={{ borderRadius: 8 }}>
       {/* Image */}
-      <div className="relative aspect-square overflow-hidden rounded-t-xl bg-gray-50">
+      <div style={{ position: "relative", aspectRatio: "1/1", overflow: "hidden", borderRadius: "8px 8px 0 0", background: "#F8FAFC" }}>
         <Image
           src={image}
           alt={product.name}
@@ -33,38 +43,68 @@ export function ProductCard({ product }: { product: Product }) {
           className="object-contain p-4 group-hover:scale-105 transition-transform duration-300"
           sizes="(max-width:640px) 50vw, (max-width:1024px) 33vw, 25vw"
         />
-        {/* Badges */}
-        <div className="absolute top-2 left-2 flex flex-col gap-1">
-          <span className={`${badge.color} text-xs font-bold px-2 py-0.5 rounded-full`}>{badge.label}</span>
+        <div style={{ position: "absolute", top: 8, left: 8, display: "flex", flexDirection: "column", gap: 4 }}>
+          <span className={badgeClass}>{badgeLabel}</span>
           {discount && discount > 0 && (
-            <span className="bg-red-500 text-white text-xs font-bold px-2 py-0.5 rounded-full">-{discount}%</span>
+            <span style={{ background: "#EF4444", color: "#fff", fontSize: "0.65rem", fontWeight: 700, padding: "2px 6px", borderRadius: 2, fontFamily: "'Space Grotesk',sans-serif" }}>
+              -{discount}%
+            </span>
           )}
         </div>
         {product.stock === 0 && (
-          <div className="absolute inset-0 bg-black/40 flex items-center justify-center rounded-t-xl">
-            <span className="text-white font-bold text-sm bg-black/60 px-3 py-1 rounded-full">Out of Stock</span>
+          <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.45)", display: "flex", alignItems: "center", justifyContent: "center", borderRadius: "8px 8px 0 0" }}>
+            <span style={{ color: "#fff", fontWeight: 700, fontSize: "0.8rem", background: "rgba(0,0,0,0.6)", padding: "4px 12px", borderRadius: 20, fontFamily: "'Space Grotesk',sans-serif" }}>Out of Stock</span>
           </div>
         )}
       </div>
 
       {/* Info */}
-      <div className="p-3">
-        <p className="text-xs text-muted mb-1">{product.categories?.name}</p>
-        <h3 className="font-semibold text-sm text-brand line-clamp-2 mb-2 leading-snug">{product.name}</h3>
-        <div className="flex items-end justify-between gap-2">
+      <div style={{ padding: "12px 14px 14px" }}>
+        {product.categories?.name && (
+          <p style={{ color: "#64748B", fontSize: "0.7rem", fontFamily: "'Inter',sans-serif", marginBottom: 4 }}>{product.categories.name}</p>
+        )}
+        <h3 style={{ fontFamily: "'Space Grotesk',sans-serif", fontWeight: 600, fontSize: "0.875rem", color: "#111827", lineHeight: 1.3, marginBottom: 8, display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>
+          {product.name}
+        </h3>
+
+        {/* Specs preview */}
+        {product.specs && Object.keys(product.specs).length > 0 && (
+          <div style={{ marginBottom: 10 }}>
+            {Object.entries(product.specs).slice(0, 3).map(([k, v]) => (
+              <div key={k} style={{ display: "flex", justifyContent: "space-between", fontFamily: "'JetBrains Mono', monospace", fontSize: "0.65rem", color: "#64748B", padding: "1px 0" }}>
+                <span>{k.toUpperCase()}</span>
+                <span style={{ color: "#374151" }}>{v}</span>
+              </div>
+            ))}
+          </div>
+        )}
+
+        <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", gap: 8 }}>
           <div>
-            <p className="text-accent font-bold text-base">{formatKES(product.price)}</p>
+            <p style={{ fontFamily: "'Space Grotesk',sans-serif", fontWeight: 700, fontSize: "1rem", color: "#006BFF" }}>{formatKES(product.price)}</p>
             {product.original_price && (
-              <p className="text-muted text-xs line-through">{formatKES(product.original_price)}</p>
+              <p style={{ color: "#94A3B8", fontSize: "0.7rem", textDecoration: "line-through", fontFamily: "'Inter',sans-serif" }}>{formatKES(product.original_price)}</p>
             )}
           </div>
           <button
             onClick={handleAdd}
             disabled={product.stock === 0}
-            className="bg-brand hover:bg-brand-light text-white p-2 rounded-lg transition-colors disabled:opacity-40 disabled:cursor-not-allowed flex-shrink-0"
+            style={{
+              background: "#006BFF",
+              color: "#fff",
+              border: "none",
+              borderRadius: 6,
+              padding: "8px",
+              cursor: "pointer",
+              flexShrink: 0,
+              transition: "background 0.15s",
+              opacity: product.stock === 0 ? 0.4 : 1,
+            }}
+            onMouseEnter={e => { if (product.stock > 0) (e.currentTarget as HTMLElement).style.background = "#0058d6"; }}
+            onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = "#006BFF"; }}
             title="Add to cart"
           >
-            <ShoppingCart size={16} />
+            <ShoppingCart size={15} />
           </button>
         </div>
       </div>

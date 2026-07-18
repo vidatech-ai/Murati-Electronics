@@ -44,10 +44,10 @@ export function Footer() {
             <ul className="space-y-2 text-sm text-gray-300">
               <li className="flex items-center gap-2"><MapPin size={14} /> Kakamega, Kenya</li>
               <li className="flex items-center gap-2"><Phone size={14} />
-                <a href="tel:+254700000000" className="hover:text-accent transition-colors">+254 700 000 000</a>
+                <a href="tel:+254113259315" className="hover:text-accent transition-colors">+254 113 259 315</a>
               </li>
               <li className="flex items-center gap-2"><Mail size={14} />
-                <a href="mailto:info@muratiselectronics.co.ke" className="hover:text-accent transition-colors">info@muratiselectronics.co.ke</a>
+                <a href="mailto:muratielectronics@gmail.com" className="hover:text-accent transition-colors">muratielectronics@gmail.com</a>
               </li>
             </ul>
           </div>
