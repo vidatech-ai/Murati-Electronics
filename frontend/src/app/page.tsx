@@ -63,7 +63,7 @@ export default async function HomePage() {
   ]);
 
   return (
-    <div style={{ background: "#F1F5F9" }}>
+    <div style={{ background: "transparent" }}>
 
       {/* ── HERO ── */}
       <section style={{
@@ -171,7 +171,7 @@ export default async function HomePage() {
       </section>
 
       {/* ── CATEGORIES ── */}
-      <section style={{ background: "#FFFFFF", padding: "48px 0" }}>
+      <section style={{ background: "rgba(255,255,255,0.88)", padding: "48px 0" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 28 }}>
             <h2 className="section-title">Explore Categories</h2>
@@ -254,7 +254,7 @@ export default async function HomePage() {
       )}
 
       {/* ── CUSTOMER REVIEWS ── */}
-      <section style={{ background: "#FFFFFF", padding: "64px 0" }}>
+      <section style={{ background: "rgba(255,255,255,0.88)", padding: "64px 0" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div style={{ textAlign: "center", marginBottom: 40 }}>
             <h2 className="section-title">What Our Customers Say</h2>
@@ -304,7 +304,7 @@ export default async function HomePage() {
       </section>
 
       {/* ── PAYMENT BADGES ── */}
-      <section style={{ background: "#F1F5F9", padding: "24px 0", borderTop: "1px solid #E2E8F0" }}>
+      <section style={{ background: "rgba(241,245,249,0.85)", padding: "24px 0", borderTop: "1px solid #E2E8F0" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-wrap items-center justify-center gap-6">
           {["✅ M-Pesa Accepted", "🚚 Cash on Delivery", "🔒 Secure Checkout", "📦 Verified Products"].map((badge) => (
             <span key={badge} style={{ color: "#64748B", fontSize: "0.8rem", fontFamily: "'Inter',sans-serif", fontWeight: 500 }}>{badge}</span>
