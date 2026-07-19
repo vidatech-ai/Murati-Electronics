@@ -198,8 +198,8 @@ export default function CheckoutPage() {
                 </h2>
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
                   {([
-                    { method: "mpesa" as PaymentMethod, icon: "📱", label: "M-Pesa", sub: "STK push to your phone" },
-                    { method: "cash_on_delivery" as PaymentMethod, icon: "💵", label: "Cash on Delivery", sub: "Pay when item arrives" },
+                    { method: "mpesa" as PaymentMethod, icon: "📱", label: "M-Pesa", sub: "📦 Delivered to your door within 72 hours" },
+                    { method: "cash_on_delivery" as PaymentMethod, icon: "💵", label: "Cash on Delivery", sub: "🏢 Pick up & pay at our Kakamega offices" },
                   ]).map(({ method, icon, label, sub }) => (
                     <button
                       key={method}

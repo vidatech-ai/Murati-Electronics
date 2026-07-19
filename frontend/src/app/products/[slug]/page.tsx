@@ -164,9 +164,9 @@ export default function ProductDetailPage() {
 
           {/* Payment info */}
           <div className="mt-5 p-4 bg-surface rounded-xl text-xs text-muted space-y-1">
-            <p>✅ M-Pesa STK Push at checkout</p>
-            <p>🚚 Cash on Delivery available</p>
-            <p>📍 Delivery across Kenya</p>
+            <p>📱 M-Pesa — Delivered to your door within 72 hours</p>
+            <p>🏢 Cash on Delivery — Pick up & pay at our Kakamega offices</p>
+            <p>📍 Kakamega, Kenya</p>
           </div>
         </div>
       </div>
