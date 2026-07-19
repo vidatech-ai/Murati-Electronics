@@ -63,14 +63,14 @@ html { scroll-behavior: smooth; }
   .btn-outline {
     @apply inline-flex items-center justify-center gap-2
            font-semibold px-6 py-3 rounded-lg
-           border-2 border-white text-white
            transition-all duration-200;
     font-family: var(--font-display);
-    background: rgba(255,255,255,0.15);
-    box-shadow: 0 4px 16px rgba(0,0,0,0.2);
-    backdrop-filter: blur(4px);
+    background: #FFFFFF;
+    color: #081A2B;
+    border: 2px solid #081A2B;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
   }
-  .btn-outline:hover { background: white; color: var(--midnight); }
+  .btn-outline:hover { background: #081A2B; color: #FFFFFF; }
 
   .card {
     @apply bg-white rounded-lg border border-gray-100
@@ -90,6 +90,18 @@ html { scroll-behavior: smooth; }
     @apply text-2xl font-bold;
     color: var(--text-primary);
   }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2
+           font-semibold px-6 py-3 rounded-lg
+           transition-all duration-200;
+    font-family: var(--font-display);
+    background: #FFFFFF;
+    color: #081A2B;
+    border: 2px solid #081A2B;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+  }
+  .btn-secondary:hover { background: #081A2B; color: #FFFFFF; }
 
   .badge-new {
     @apply text-white text-xs font-bold px-2 py-0.5 rounded-sm;
