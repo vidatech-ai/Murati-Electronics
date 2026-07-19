@@ -170,7 +170,33 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ── CATEGORIES ── */}
+      {/* ── FOUNDER SECTION ── */}
+      <section style={{ background: "rgba(255,255,255,0.95)", padding: "48px 0" }}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div style={{ display: "flex", alignItems: "center", gap: 32, flexWrap: "wrap" }}>
+            <div style={{
+              width: 140, height: 140, borderRadius: "50%",
+              overflow: "hidden", flexShrink: 0,
+              border: "4px solid #006BFF",
+              boxShadow: "0 8px 32px rgba(0,107,255,0.25)",
+            }}>
+              <img src="/founder.png" alt="David Murati" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+            </div>
+            <div>
+              <p style={{ color: "#006BFF", fontSize: "0.75rem", fontWeight: 700, fontFamily: "'Space Grotesk',sans-serif", letterSpacing: "0.1em", marginBottom: 8 }}>
+                MEET THE FOUNDER
+              </p>
+              <h2 style={{ fontFamily: "'Space Grotesk',sans-serif", fontWeight: 800, fontSize: "1.5rem", color: "#081A2B", marginBottom: 8 }}>
+                David Murati
+              </h2>
+              <p style={{ color: "#64748B", fontFamily: "'Inter',sans-serif", fontSize: "0.95rem", lineHeight: 1.7, maxWidth: 500 }}>
+                Welcome to Muratis Electronics — Kenya's trusted marketplace for new, refurbished and second-hand electronics. 
+                I personally verify every device before it reaches you. Quality and trust is our promise.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
       <section style={{ background: "rgba(255,255,255,0.88)", padding: "48px 0" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 28 }}>
