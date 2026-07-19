@@ -6,7 +6,7 @@ import { Toaster } from "react-hot-toast";
 
 export const metadata: Metadata = {
   title: "Muratis Electronics — New, Refurbished & Second-Hand Electronics",
-  icons: { icon: "/logo.png", apple: "/logo.png" },
+  icons: { icon: "/favicon.png", apple: "/favicon.png" },
   description:
     "Kenya's trusted electronics marketplace. Shop laptops, smartphones, tablets, TVs, and more. New, refurbished, and second-hand electronics at great prices.",
   keywords: "electronics Kenya, laptops Kenya, smartphones Kenya, second hand electronics, refurbished electronics",
