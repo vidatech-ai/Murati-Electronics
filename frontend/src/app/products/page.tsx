@@ -47,7 +47,7 @@ export default async function ProductsPage({ searchParams }: Props) {
     : "All Products";
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8" style={{ background: "rgba(255,255,255,0.93)", borderRadius: 16, marginTop: 16, marginBottom: 16 }}>
       <div className="flex flex-col md:flex-row gap-8">
         {/* Sidebar filters */}
         <aside className="md:w-56 flex-shrink-0">

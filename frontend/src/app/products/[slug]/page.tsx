@@ -63,7 +63,7 @@ export default function ProductDetailPage() {
   };
 
   return (
-    <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8" style={{ background: "rgba(255,255,255,0.93)", borderRadius: 16, marginTop: 16, marginBottom: 16 }}>
       <button
         onClick={() => router.back()}
         className="flex items-center gap-2 text-sm text-muted hover:text-brand mb-6 transition-colors"
@@ -71,7 +71,7 @@ export default function ProductDetailPage() {
         <ArrowLeft size={16} /> Back
       </button>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-10" style={{ background: "rgba(255,255,255,0.95)", borderRadius: 16, padding: 24 }}>
         {/* Images */}
         <div>
           <div className="relative aspect-square bg-gray-50 rounded-2xl overflow-hidden mb-3">
