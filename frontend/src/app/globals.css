@@ -29,6 +29,11 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* Make all text readable over background */
+p, h1, h2, h3, h4, h5, h6, span, a, label, li {
+  text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+
 h1, h2, h3, h4, .display {
   font-family: var(--font-display);
 }
@@ -76,7 +81,7 @@ html { scroll-behavior: smooth; }
     @apply bg-white rounded-lg border border-gray-100
            transition-all duration-200;
     box-shadow: 0 2px 12px rgba(0,0,0,0.15);
-    background: rgba(255,255,255,0.95);
+    background: rgba(255,255,255,0.97);
   }
   .card:hover { box-shadow: 0 4px 16px rgba(0,107,255,0.10); transform: translateY(-2px); }
 
@@ -121,4 +126,19 @@ html { scroll-behavior: smooth; }
     font-family: var(--font-display);
     letter-spacing: 0.05em;
   }
+
+  .section-wrap {
+    background: rgba(255,255,255,0.92);
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+  }
+
+  nav a, header a, header span, header button {
+    text-shadow: none;
+  }
+
+  .text-brand { text-shadow: none; }
+  .text-muted { text-shadow: none; }
+  .text-accent { text-shadow: none; }
 }
