@@ -1,10 +1,34 @@
 "use client";
+import { createClient } from "@/lib/supabase/client";
 import { useCart } from "@/hooks/useCart";
 import { formatKES, getProductImage } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Trash2, ShoppingBag } from "lucide-react";
+function CheckoutButton() {
+  const router = useRouter();
+  const [checking, setChecking] = useState(false);
+  const supabase = createClient();
+
+  const handleCheckout = async () => {
+    setChecking(true);
+    const { data } = await supabase.auth.getUser();
+    setChecking(false);
+    if (data.user) {
+      router.push("/checkout");
+    } else {
+      router.push("/auth/login?redirect=/checkout");
+    }
+  };
+
+  return (
+    <button onClick={handleCheckout} disabled={checking} className="btn-primary w-full">
+      {checking ? "Checking..." : "Proceed to Checkout"}
+    </button>
+  );
+}
 
 export default function CartPage() {
   const { items, removeItem, updateQty, total, count } = useCart();
@@ -81,9 +105,7 @@ export default function CartPage() {
               <span>Total</span>
               <span className="text-accent text-lg">{formatKES(total)}</span>
             </div>
-            <button onClick={() => router.push("/checkout")} className="btn-primary w-full">
-              Proceed to Checkout
-            </button>
+            <CheckoutButton />
             <Link href="/products" className="block text-center text-sm text-muted hover:text-brand mt-3 transition-colors">
               Continue Shopping
             </Link>
