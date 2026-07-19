@@ -14,12 +14,17 @@ function CheckoutButton() {
 
   const handleCheckout = async () => {
     setChecking(true);
-    const { data } = await supabase.auth.getUser();
-    setChecking(false);
-    if (data.user) {
-      router.push("/checkout");
-    } else {
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (session) {
+        router.push("/checkout");
+      } else {
+        router.push("/auth/login?redirect=/checkout");
+      }
+    } catch {
       router.push("/auth/login?redirect=/checkout");
+    } finally {
+      setChecking(false);
     }
   };
 

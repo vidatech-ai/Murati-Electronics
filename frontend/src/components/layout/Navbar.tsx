@@ -119,13 +119,42 @@ export function Navbar() {
               <User size={20} />
             </Link>
           ) : (
-            <Link
-              href="/auth/login"
-              className="hidden sm:flex items-center gap-1 text-sm font-semibold text-gray-300 hover:text-white transition-colors"
-              style={{ fontFamily: "'Space Grotesk', sans-serif" }}
-            >
-              <User size={18} /> Sign In
-            </Link>
+            <div className="hidden sm:flex items-center gap-2">
+              <Link
+                href="/auth/login"
+                style={{
+                  fontFamily: "'Space Grotesk', sans-serif",
+                  background: "transparent",
+                  color: "#FFFFFF",
+                  padding: "7px 14px",
+                  borderRadius: 8,
+                  border: "1.5px solid rgba(255,255,255,0.4)",
+                  fontSize: "0.85rem",
+                  fontWeight: 600,
+                  textDecoration: "none",
+                  transition: "all 0.15s",
+                }}
+              >
+                Sign In
+              </Link>
+              <Link
+                href="/auth/login?mode=signup"
+                style={{
+                  fontFamily: "'Space Grotesk', sans-serif",
+                  background: "#006BFF",
+                  color: "#FFFFFF",
+                  padding: "7px 14px",
+                  borderRadius: 8,
+                  fontSize: "0.85rem",
+                  fontWeight: 600,
+                  textDecoration: "none",
+                  boxShadow: "0 2px 8px rgba(0,107,255,0.4)",
+                  transition: "all 0.15s",
+                }}
+              >
+                Sign Up
+              </Link>
+            </div>
           )}
 
           <Link href="/cart" className="relative flex items-center gap-1.5 text-gray-300 hover:text-white transition-colors">

@@ -5,7 +5,8 @@ import { createClient } from "@/lib/supabase/client";
 import toast from "react-hot-toast";
 
 export default function LoginForm() {
-  const [mode, setMode] = useState<"login" | "signup">("login");
+  const modeParam = useSearchParams().get("mode");
+  const [mode, setMode] = useState<"login" | "signup">(modeParam === "signup" ? "signup" : "login");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [fullName, setFullName] = useState("");
