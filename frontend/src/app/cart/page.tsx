@@ -36,8 +36,14 @@ function CheckoutButton() {
 }
 
 export default function CartPage() {
-  const { items, removeItem, updateQty, total, count } = useCart();
+  const { items, removeItem, updateQty, total, count, loaded } = useCart();
   const router = useRouter();
+
+  if (!loaded) return (
+    <div className="min-h-[60vh] flex items-center justify-center">
+      <div className="w-8 h-8 border-4 border-t-transparent rounded-full animate-spin" style={{ borderColor: "#006BFF", borderTopColor: "transparent" }} />
+    </div>
+  );
 
   if (count === 0) return (
     <div className="min-h-[60vh] flex flex-col items-center justify-center gap-4 px-4">

@@ -119,7 +119,7 @@ export function Navbar() {
               <User size={20} />
             </Link>
           ) : (
-            <div className="hidden sm:flex items-center gap-2">
+            <div className="flex items-center gap-2">
               <Link
                 href="/auth/login"
                 style={{
