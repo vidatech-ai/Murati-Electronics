@@ -55,6 +55,8 @@ html { scroll-behavior: smooth; }
            disabled:opacity-50 disabled:cursor-not-allowed;
     background: var(--electric);
     font-family: var(--font-display);
+    box-shadow: 0 4px 16px rgba(0,107,255,0.4);
+    border: 2px solid rgba(255,255,255,0.2);
   }
   .btn-primary:hover { background: #0058d6; transform: translateY(-1px); }
 
@@ -64,13 +66,17 @@ html { scroll-behavior: smooth; }
            border-2 border-white text-white
            transition-all duration-200;
     font-family: var(--font-display);
+    background: rgba(255,255,255,0.15);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+    backdrop-filter: blur(4px);
   }
   .btn-outline:hover { background: white; color: var(--midnight); }
 
   .card {
     @apply bg-white rounded-lg border border-gray-100
            transition-all duration-200;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+    background: rgba(255,255,255,0.95);
   }
   .card:hover { box-shadow: 0 4px 16px rgba(0,107,255,0.10); transform: translateY(-2px); }
 
