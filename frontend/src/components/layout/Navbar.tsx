@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import { ShoppingCart, Search, Menu, X, User, Heart } from "lucide-react";
 import { useCart } from "@/hooks/useCart";
 import { createClient } from "@/lib/supabase/client";
