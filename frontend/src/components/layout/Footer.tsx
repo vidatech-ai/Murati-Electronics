@@ -44,7 +44,7 @@ export function Footer() {
             <ul className="space-y-2 text-sm text-gray-300">
               <li className="flex items-center gap-2"><MapPin size={14} /> Kakamega, Kenya</li>
               <li className="flex items-center gap-2"><Phone size={14} />
-                <a href="tel:+254113259315" className="hover:text-accent transition-colors">+254 113 259 315</a>
+                <a href="https://wa.me/254113259315" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">+254 113 259 315 (WhatsApp)</a>
               </li>
               <li className="flex items-center gap-2"><Mail size={14} />
                 <a href="mailto:muratielectronics@gmail.com" className="hover:text-accent transition-colors">muratielectronics@gmail.com</a>
@@ -55,6 +55,9 @@ export function Footer() {
 
         <div className="border-t border-brand-light mt-8 pt-6 flex flex-col sm:flex-row justify-between items-center gap-3 text-xs text-gray-400">
           <p>© {new Date().getFullYear()} Muratis Electronics. All rights reserved.</p>
+<p style={{ color: "#006BFF", fontFamily: "'Space Grotesk',sans-serif", fontWeight: 700, fontSize: "0.85rem", letterSpacing: "0.05em" }}>
+  Powered by Murati Industries
+</p>
           <div className="flex gap-4">
             <span className="flex items-center gap-1">✅ M-Pesa Accepted</span>
             <span className="flex items-center gap-1">🚚 Cash on Delivery</span>
