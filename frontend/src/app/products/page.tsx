@@ -51,7 +51,9 @@ export default async function ProductsPage({ searchParams }: Props) {
       <div className="flex flex-col md:flex-row gap-8">
         {/* Sidebar filters */}
         <aside className="md:w-56 flex-shrink-0">
-          <ProductFilters categories={categories as Category[]} current={searchParams} />
+          <div style={{ background: "rgba(255,255,255,0.95)", borderRadius: 12, padding: 16, border: "1.5px solid #E2E8F0", boxShadow: "0 4px 16px rgba(0,0,0,0.1)" }}>
+            <ProductFilters categories={categories as Category[]} current={searchParams} />
+          </div>
         </aside>
 
         {/* Products grid */}

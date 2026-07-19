@@ -45,8 +45,13 @@ export function ProductFilters({ categories, current }: Props) {
               className={`block w-full text-left text-sm px-3 py-2 rounded-lg transition-colors ${
                 current.condition === opt.value || (!current.condition && !opt.value)
                   ? "bg-accent text-white font-semibold"
-                  : "hover:bg-gray-100 text-brand"
+                  : "text-brand font-medium"
               }`}
+              style={
+                current.condition === opt.value || (!current.condition && !opt.value)
+                  ? {}
+                  : { background: "#FFFFFF", border: "1.5px solid #E2E8F0" }
+              }
             >
               {opt.label}
             </button>
