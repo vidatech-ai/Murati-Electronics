@@ -47,25 +47,15 @@ export function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center gap-4">
 
         {/* Logo */}
-        <Link href="/" className="flex-shrink-0 flex flex-col leading-none select-none" style={{ minWidth: 110 }}>
-          <span style={{
-            fontFamily: "'Space Grotesk', sans-serif",
-            fontWeight: 800,
-            fontSize: "1.25rem",
-            color: "#FFFFFF",
-            letterSpacing: "-0.02em",
-          }}>
-            MURATIS
-          </span>
-          <span style={{
-            fontFamily: "'Space Grotesk', sans-serif",
-            fontWeight: 500,
-            fontSize: "0.6rem",
-            color: "#006BFF",
-            letterSpacing: "0.18em",
-          }}>
-            ELECTRONICS
-          </span>
+        <Link href="/" className="flex-shrink-0" style={{ minWidth: 110 }}>
+          <Image
+            src="/logo.png"
+            alt="Muratis Electronics"
+            width={140}
+            height={50}
+            priority
+            style={{ objectFit: "contain", height: 50, width: "auto" }}
+          />
         </Link>
 
         {/* Desktop nav links */}
