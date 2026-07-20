@@ -9,28 +9,14 @@ import { useRouter } from "next/navigation";
 import { Trash2, ShoppingBag } from "lucide-react";
 function CheckoutButton() {
   const router = useRouter();
-  const [checking, setChecking] = useState(false);
-  const supabase = createClient();
 
-  const handleCheckout = async () => {
-    setChecking(true);
-    try {
-      const { data: { session } } = await supabase.auth.getSession();
-      if (session) {
-        router.push("/checkout");
-      } else {
-        router.push("/auth/login?redirect=/checkout");
-      }
-    } catch {
-      router.push("/auth/login?redirect=/checkout");
-    } finally {
-      setChecking(false);
-    }
+  const handleCheckout = () => {
+    router.push("/checkout");
   };
 
   return (
-    <button onClick={handleCheckout} disabled={checking} className="btn-primary w-full">
-      {checking ? "Checking..." : "Proceed to Checkout"}
+    <button onClick={handleCheckout} className="btn-primary w-full">
+      Proceed to Checkout
     </button>
   );
 }
@@ -55,7 +41,7 @@ export default function CartPage() {
   );
 
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10" style={{ background: "rgba(255,255,255,0.93)", borderRadius: 16, marginTop: 16, marginBottom: 16 }}>
       <h1 className="text-2xl font-bold text-brand mb-8">Your Cart ({count} items)</h1>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">

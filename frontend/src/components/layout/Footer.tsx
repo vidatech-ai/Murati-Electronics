@@ -55,9 +55,8 @@ export function Footer() {
 
         <div className="border-t border-brand-light mt-8 pt-6 flex flex-col sm:flex-row justify-between items-center gap-3 text-xs text-gray-400">
           <p>© {new Date().getFullYear()} Muratis Electronics. All rights reserved.</p>
-<p style={{ color: "#006BFF", fontFamily: "'Space Grotesk',sans-serif", fontWeight: 700, fontSize: "0.85rem", letterSpacing: "0.05em" }}>
-  Powered by Murati Industries
-</p>
+          <p style={{ color: "#006BFF", fontFamily: "'Space Grotesk',sans-serif", fontWeight: 700, fontSize: "0.85rem", letterSpacing: "0.05em" }}>
+  Powered by Murati Industries</p>
           <div className="flex gap-4">
             <span className="flex items-center gap-1">✅ M-Pesa Accepted</span>
             <span className="flex items-center gap-1">🚚 Cash on Delivery</span>

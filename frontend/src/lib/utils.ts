@@ -9,7 +9,11 @@ export function slugify(text: string) {
 export function getProductImage(product: { product_images?: { url: string; is_primary: boolean }[] }) {
   if (!product.product_images?.length) return "/placeholder-product.png";
   const primary = product.product_images.find((i) => i.is_primary);
-  return primary?.url ?? product.product_images[0].url;
+  const url = primary?.url ?? product.product_images[0].url;
+  if (url.includes("supabase") && !url.includes("transform")) {
+    return `${url}?quality=100&format=origin`;
+  }
+  return url;
 }
 
 export function conditionBadge(condition: string) {
